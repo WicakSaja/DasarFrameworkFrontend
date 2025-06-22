@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo Template Engine</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+      }
+      input,
+      button {
+        padding: 5px;
+        margin: 5px 0;
+        display: block;
+      }
+      .section {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="section">
+        <h1>Hello <span data-bind="name"></span>!</h1>
+        <input type="text" data-model="name" placeholder="Enter your name" />
+      </div>
+
+      <div class="section">
+        <p>Your score is <span data-bind="score"></span></p>
+        <button onclick="changeScore()">Increase Score</button>
+      </div>
+
+      <div class="section">
+        <p>
+          Skor Akhir: <span data-bind="scoreService.getFinalScore()"></span>
+        </p>
+      </div>
+
+      <div class="section">
+        <p>
+          Alamat:
+          <input
+            type="text"
+            data-model="address"
+            placeholder="Enter your address"
+          />
+        </p>
+        <p>Alamatmu adalah: <span data-bind="address"></span></p>
+      </div>
+
+      <div class="section">
+        <p>Waktu sekarang: <span data-bind="today"></span></p>
+      </div>
+
+      <div class="section">
+        <button onclick="engine.set('name', 'Bayu'); engine.set('score', 150);">
+          Set Manual
+        </button>
+      </div>
+    </div>
+    <script src="template-engine.js"></script>
+    
+  </body>
+</html>
