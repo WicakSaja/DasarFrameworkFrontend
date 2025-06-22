@@ -62,6 +62,38 @@
       </div>
     </div>
     <script src="template-engine.js"></script>
-    
+    <script src="di-container.js"></script>
+    <script>
+      // Setup
+      const container = new DIContainer();
+
+      container.register("clockService", () => ({
+        now: () => new Date().toLocaleTimeString(),
+      }));
+
+      container.register("scoreService", () => ({
+        getFinalScore: () => engine.state.score + 10,
+      }));
+
+      const app = document.getElementById("app");
+      const engine = new TemplateEngine(
+        {
+          name: "Bayu",
+          score: 90,
+          address: "Pasuruan",
+          today: "",
+        },
+        app,
+        container
+      );
+
+      function changeScore() {
+        engine.set("score", engine.state.score + 10);
+      }
+
+      setInterval(() => {
+        engine.set("today", container.get("clockService").now());
+      }, 1000);
+    </script>
   </body>
 </html>
